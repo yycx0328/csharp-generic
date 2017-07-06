@@ -78,27 +78,27 @@ C#中泛型是.NET Framework 2.0的一个新增加的特性，它为使用c#语�
 第三种方式将参数以object类型来接收（因为C#中object是所有对象的父类），这样看起来代码也简洁，但有一个不好的地方容易造成效率损失，因为在值类型和引用类型之间的转换会有一个装箱和拆箱的操作，而object又太过于松散，无法对其约束，如果想在某一个函数中是用类属性或者方法，只能通过强转和判断来实现，而当类型传错，在强转时便很容易出错；
 泛型的出现提供了一种完美的解决方案，它避免了代码的冗余，而且易于扩展，不存在装箱/拆箱的效率损耗，而且泛型还提供了各种约束方式，引用类型约束（class）、值类型约束（struct）、构造函数约束（new）、以及具体某个类约束等。<br />
 
-  // 约束泛型为引用类型<br />
+  // 约束泛型为引用类型
   public void ShowStruct<T>(T t) where T : struct
   {
       Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name + ":" + t.GetType());
   }
 
-  // 约束泛型为引用类型<br />
+  // 约束泛型为引用类型
   public void ShowClass1<T>(T t) where T : class
   {
       // T nteT = new T(); // 错误
       Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name + ":" + t.GetType());
   }
 
-  // 约束泛型为引用类型，并且有无参构造函数<br />
+  // 约束泛型为引用类型，并且有无参构造函数
   public void ShowClass2<T>(T t) where T : class, new()
   {
       T nteT = new T();
       Console.WriteLine(System.Reflection.MethodBase.GetCurrentMethod().Name + ":" + t.GetType());
   }
 
-  // 约束泛型为People类或者其子类<br />
+  // 约束泛型为People类或者其子类
   public void ShowPeople<T>(T t) where T : People
   {
       Console.WriteLine("{0}的生日是{1}", t.Name, t.Birthday);
